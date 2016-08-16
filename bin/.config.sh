@@ -30,6 +30,7 @@ CODE_DIR=$($READLINK -f "$ROOT_DIR/app")
 BACKUP_DIR=$($READLINK -f "$ROOT_DIR/backup")
 BACKUP_SOLR_FILE='solr.cores.tbz2'
 BACKUP_MYSQL_FILE='mysql.sql.bz2'
+BACKUP_POSTGRES_FILE='postgres.dmp.bz2'
 
 #######################################
 ## Functions

@@ -54,11 +54,21 @@ solr-restore:
 	bash ./bin/restore.sh solr
 
 #############################
+# PostgreSQL
+#############################
+
+postgres-backup:
+	bash ./bin/backup.sh postgres
+
+postgres-restore:
+	bash ./bin/restore.sh postgres
+
+#############################
 # General
 #############################
 
-backup:  mysql-backup  solr-backup
-restore: mysql-restore solr-restore
+backup:  mysql-backup  solr-backup  postgres-backup
+restore: mysql-restore solr-restore  postgres-restore
 
 build:
 	bash bin/build.sh
@@ -70,6 +80,7 @@ shell:
 
 root:
 	docker exec -it -u root $$(docker-compose ps -q app) /bin/bash
+
 
 #############################
 # Argument fix workaround

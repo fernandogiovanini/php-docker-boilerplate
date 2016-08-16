@@ -59,4 +59,23 @@ case "$1" in
             echo " * Skipping solr restore, no such container"
         fi
         ;;
+
+    ###################################
+    ## PostgreSQL
+    ###################################
+    "postgres")
+        if [[ -n "$(dockerContainerId postgres)" ]]; then
+            if [ -f "${BACKUP_DIR}/${BACKUP_POSTGRES_FILE}" ]; then
+                logMsg "Starting PostgreSQL restore..."
+                docker exec "$(docker-compose ps -q postgres)" restore "$(bzcat /${BACKUP_DIR}/${BACKUP_POSTGRES_FILE})"
+                logMsg "Finished"
+            else
+                errorMsg "PostgreSQL backup file not found"
+                exit 1
+            fi
+        else
+            echo " * Skipping postgresql restore, no such container"
+        fi
+        ;;
+
 esac

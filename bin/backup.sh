@@ -53,4 +53,23 @@ case "$1" in
             echo " * Skipping solr backup, no such container"
         fi
         ;;
+
+    ###################################
+    ## PostgreSQL
+    ###################################
+    "postgres")
+        if [[ -n "$(dockerContainerId postgres)" ]]; then
+            if [ -f "${BACKUP_DIR}/${BACKUP_POSTGRES_FILE}" ]; then
+                logMsg "Removing old backup file..."
+                rm -f -- "${BACKUP_DIR}/${BACKUP_POSTGRES_FILE}"
+            fi
+
+            logMsg "Starting PostgreSQL backup..."
+            docker exec -i "$(docker-compose ps -q postgres)" backup | bzip2 >> "${BACKUP_DIR}/${BACKUP_POSTGRES_FILE}"
+            logMsg "Finished"
+        else
+            echo " * Skipping postgresql backup, no such container"
+        fi
+        ;;
+
 esac
