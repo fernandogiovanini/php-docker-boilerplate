@@ -51,6 +51,9 @@ make mysql-restore        | Restore MySQL databases
 make solr-backup          | Backup Solr cores
 make solr-restore         | Restore Solr cores
 <br>                      |
+make postgres-backup      | Backup PostgreSQL databases
+make postgres-restore     | Restore PostgreSQL databases
+<br>                      |
 make build                | Run building (composer, gulp, bower)
 
 ## Environment settings
